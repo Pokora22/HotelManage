@@ -32,4 +32,13 @@ class CleanerTest {
         cleaner.request(rtbc);
         assertEquals(rtbc, cleaner.getSchedule().get(LocalDate.now().atStartOfDay().plusHours(11)));
     }
+
+    @Test
+    void requestReturnsFalseWhenCleanerScheduleFull(){
+        for (int i = 0; i < 7; i++) {
+            cleaner.request(r1);
+        }
+
+        assertFalse(cleaner.request(rtbc));
+    }
 }

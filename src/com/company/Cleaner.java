@@ -19,17 +19,19 @@ public class Cleaner {
         return (null == schedule.get(time));
     }
 
-    public void request(Room room){
+    public boolean request(Room room){
         LocalDateTime check = LocalDate.now().atStartOfDay().plusHours(8); //from 8am to 8pm
         LocalDateTime dayLimit = check.plusHours(12);
 
         while(check.isBefore(dayLimit)){
             if(isFree(check)) {
                 updateSchedule(check, room);
-                return;
+                return true;
             }
             check = check.plusHours(1);
         }
+
+        return false;
     }
 
     public HashMap<LocalDateTime, Room> getSchedule() {
