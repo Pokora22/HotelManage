@@ -13,7 +13,7 @@ class RoomTest {
 
     @BeforeEach
     void setUp() {
-        std = new RoomCategory(100);
+        std = new RoomCategory(100, 1, 1, 1, 1.2f, 1.2f, 1.2f, .8f, .8f, .8f, 1.5f, 1.5f, 1.5f);
         customer = new Customer();
         r1 = new Room(std);
 
@@ -33,5 +33,10 @@ class RoomTest {
         r1.addBooking(middleBooking);
 
         assertEquals(1, r1.getBookings().indexOf(middleBooking));
+    }
+
+    @Test
+    void calculatePriceReturnsCorrectPrice() {
+        assertEquals(1360,r1.calculatePrice(LocalDate.of(2010, 3, 28), LocalDate.of(2010, 4, 8)));
     }
 }

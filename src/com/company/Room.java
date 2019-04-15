@@ -13,8 +13,16 @@ public class Room {
         bookings = new LinkedList<>();
     }
 
-    public float calculatePrice(){
-        return 0; //Calculate price from category
+    public float calculatePrice(LocalDate startDate, LocalDate endDate){
+        float price = 0;
+        float catPrice = category.getPrice();
+        float[] season = category.getSeasonMultiplier();
+        LocalDate currentCheck = startDate;
+
+        for(LocalDate checkDate = startDate; checkDate.isBefore(endDate.plusDays(1)); checkDate = checkDate.plusDays(1))
+            price += catPrice * season[checkDate.getMonthValue() - 1];
+
+        return price;
     }
 
     public boolean matches(LocalDate startDate, LocalDate endDate, RoomCategory category){
